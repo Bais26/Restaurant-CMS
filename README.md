@@ -1,3 +1,17 @@
+## flow
+## Page Web Restaurant (RestaurantKu)
+Sebuah website aplikasi yang digunakan untuk sebuah sistem pemesanan pada sebuah restaurant
+## Kasir 
+Melihat Harga dan total pesanan
+konfirmasi pembayaran
+cetak bukti pembayaran
+## Pelayan
+Melihat menu dan harga
+memilih menu
+membuat pesanan
+update pesanan
+menjumlahkan pesanan
+
 # [Start Bootstrap - SB Admin](https://startbootstrap.com/template/sb-admin/)
 
 [SB Admin](https://startbootstrap.com/template/sb-admin/) is an open source, admin dashboard template for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
