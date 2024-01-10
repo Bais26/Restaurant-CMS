@@ -4,7 +4,6 @@ Sebuah website aplikasi yang digunakan untuk sebuah sistem pemesanan pada sebuah
 ## Kasir 
 Melihat Harga dan total pesanan
 konfirmasi pembayaran
-cetak bukti pembayaran
 ## Pelayan
 Melihat menu dan harga
 memilih menu

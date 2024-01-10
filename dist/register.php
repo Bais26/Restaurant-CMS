@@ -3,7 +3,7 @@ include 'config/conn.php';
 session_start();
 
 if (isset($_SESSION['username'])) {
-    header("Location: index.php");
+    header("Location:index.php");
     exit();
 }
 
@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     $stmt = $conn->prepare("INSERT INTO Admin (username, email, password) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $username, $email, $password);
     if ($stmt->execute()) {
-        header("Location: index.php");
+        header("Location:index.php");
         exit();
     } else {
         echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Niagahoster Register</title>
+    <title>Register</title>
 </head>
 <body style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0;">
 
