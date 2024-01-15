@@ -11,6 +11,10 @@ membuat pesanan
 update pesanan
 menjumlahkan pesanan
 
+# error hendling 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 # [Start Bootstrap - SB Admin](https://startbootstrap.com/template/sb-admin/)
 
 [SB Admin](https://startbootstrap.com/template/sb-admin/) is an open source, admin dashboard template for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).

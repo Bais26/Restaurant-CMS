@@ -1,13 +1,12 @@
 <?php
-// Konfigurasi koneksi ke database
-$servername = "localhost";
+$host = "localhost";
 $username = "root";
 $password = "";
-$dbname = "RestaurantKu";
+$database = "RestaurantKu";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = new mysqli($host, $username, $password, $database);
 
-if (!$conn) {
-    die("Koneksi ke database gagal: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
 ?>

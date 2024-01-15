@@ -1,29 +1,42 @@
 <?php
 include 'config/conn.php';
-session_start();
 
-if (isset($_SESSION['username'])) {
-    header("Location:index.php");
-    exit();
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $cpassword = $_POST["cpassword"];
 
-$username = $email = "";
-
-if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = hash('sha256', $_POST['password']); // Hash the input password using SHA-256
-
-    $stmt = $conn->prepare("INSERT INTO Admin (username, email, password) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $password);
-    if ($stmt->execute()) {
-        header("Location:index.php");
-        exit();
+    if (empty($username) || empty($password) || empty($cpassword)) {
+        echo "Mohon isi semua kolom registrasi.";
     } else {
-        echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
+        if ($password != $cpassword) {
+            echo "Password dan konfirmasi password tidak cocok.";
+        } else {
+            $checkQuery = "SELECT * FROM admins WHERE username='$username'";
+            $checkResult = $conn->query($checkQuery);
+
+            if ($checkResult->num_rows > 0) {
+                echo "Username sudah terdaftar. Silakan gunakan yang lain.";
+            } else {
+                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+                $sql = "INSERT INTO admins (username, password) VALUES ('$username', '$hashedPassword')";
+                
+                if ($conn->query($sql) === TRUE) {
+                    echo "Registrasi berhasil. Silakan <a href='index.php'>login</a>.";
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+            }
+        }
     }
 }
+
+$conn->close();
 ?>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,10 +53,7 @@ if (isset($_POST['submit'])) {
         <form action="" method="POST" class="login-email" style="display: flex; flex-direction: column;">
             <p class="login-text" style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 20px;">Register</p>
             <div class="input-group" style="margin-bottom: 15px;">
-                <input type="text" placeholder="Username" name="username" value="<?php echo $username; ?>" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box;" required>
-            </div>
-            <div class="input-group" style="margin-bottom: 15px;">
-                <input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box;" required>
+                <input type="text" placeholder="Username" name="username" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box;" required>
             </div>
             <div class="input-group" style="margin-bottom: 15px;">
                 <input type="password" placeholder="Password" name="password" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box;" required>
